@@ -6,53 +6,64 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int REQUEST_CODE = 1;
+    private Button btnOpenInput;
+    private TextView tvApartamentInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.e("Lifecycle", "onCreate called");
 
-        Button btnNext = findViewById(R.id.btnNext);
-        btnNext.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-            startActivity(intent);
+        btnOpenInput = findViewById(R.id.btnOpenInput);
+        tvApartamentInfo = findViewById(R.id.tvApartamentInfo);
+
+        btnOpenInput.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ApartamentInputActivity.class);
+            startActivityForResult(intent, REQUEST_CODE);
         });
+    }
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            String receivedMessage = extras.getString("responseMessage");
-            int receivedSum = extras.getInt("sumResult", 0);
-            Toast.makeText(this, "Received: " + receivedMessage + " Sum: " + receivedSum, Toast.LENGTH_LONG).show();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            if (data != null && data.hasExtra("apartament")) {
+                try {
+                    APArtament apartament = (APArtament) data.getSerializableExtra("apartament");
+                    if (apartament != null) {
+                        tvApartamentInfo.setText(
+                                " Adresa: " + apartament.getAdresa() +
+                                        "\n Număr camere: " + apartament.getNumarCamere() +
+                                        "\n Are balcon: " + (apartament.isAreBalcon() ? "Da" : "Nu") +
+                                        "\n Locație: " + apartament.getLocatie() +
+                                        "\n Suprafață: " + apartament.getSuprafata() + " m²" +
+                                        "\n Rating: " + apartament.getRating() + " stele" +
+                                        "\n Disponibil pentru închiriere: " + (apartament.isInchiriere() ? "Da" : "Nu") +
+                                        "\n Mobilat: " + (apartament.isMobilat() ? "Da" : "Nu") +
+                                        "\n Tip Apartament: " + apartament.getTipApartament()
+                        );
+                    } else {
+                        Toast.makeText(this, "Obiectul apartament este NULL!", Toast.LENGTH_LONG).show();
+                        Log.e("MainActivity", "Apartament este NULL!");
+                    }
+                } catch (Exception e) {
+                    Log.e("MainActivity", "Eroare la primirea obiectului APArtament", e);
+                    Toast.makeText(this, "Eroare la primirea obiectului!", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Log.e("MainActivity", "Nu există date în Intent!");
+                Toast.makeText(this, "Datele nu au fost transmise!", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.w("Lifecycle", "onStart called");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d("Lifecycle", "onResume called");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.i("Lifecycle", "onPause called");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.v("Lifecycle", "onStop called");
-    }
 }

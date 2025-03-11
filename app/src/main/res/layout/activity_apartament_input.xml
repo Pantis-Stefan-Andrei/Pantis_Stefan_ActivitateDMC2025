@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ApartamentInputActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Adresa -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adresa"/>
+
+            <EditText
+                android:id="@+id/etAdresa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+
+            <!-- Număr camere -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Număr camere"/>
+
+            <EditText
+                android:id="@+id/etNumarCamere"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"/>
+
+
+
+
+            <!-- Checkbox pentru Balcon -->
+            <CheckBox
+                android:id="@+id/cbBalcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Are balcon"/>
+
+            <!-- RadioGroup pentru Tip Locație -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tip locație"/>
+
+            <RadioGroup
+                android:id="@+id/rgLocatie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/rbUrban"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Urban"/>
+
+                <RadioButton
+                    android:id="@+id/rbRural"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rural"/>
+
+                <RadioButton
+                    android:id="@+id/rbSemiurban"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Semiurban"/>
+            </RadioGroup>
+
+            <!-- Spinner pentru Tip Apartament -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tip Apartament"/>
+
+            <Spinner
+                android:id="@+id/spinnerTipApartament"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/tip_apartamente"/>
+
+
+            <!-- Suprafață apartament -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Suprafață (m²)"/>
+
+            <EditText
+                android:id="@+id/etSuprafata"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"/>
+
+
+            <!-- RatingBar -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rating"/>
+
+            <RatingBar
+                android:id="@+id/rbRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"/>
+
+            <!-- Switch -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Disponibil pentru închiriere"/>
+
+            <Switch
+                android:id="@+id/switchInchiriere"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <!-- ToggleButton -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apartament mobilat"/>
+
+            <ToggleButton
+                android:id="@+id/toggleMobilat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOff="Nu"
+                android:textOn="Da"/>
+
+            <!-- Buton Trimite -->
+            <Button
+                android:id="@+id/btnSubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Trimite"/>
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
