@@ -1,57 +1,58 @@
 package com.example.lab1;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import androidx.activity.EdgeToEdge;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        Log.e("Lifecycle", "onCreate called");
 
-        // Gestionare margini sistem
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        Button btnNext = findViewById(R.id.btnNext);
+        btnNext.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+            startActivity(intent);
         });
 
-        // Referințe UI
-        Button button = findViewById(R.id.button);
-        TextView textView = findViewById(R.id.textView);
-        EditText editText1 = findViewById(R.id.editText1);
-        EditText editText2 = findViewById(R.id.editText2);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String receivedMessage = extras.getString("responseMessage");
+            int receivedSum = extras.getInt("sumResult", 0);
+            Toast.makeText(this, "Received: " + receivedMessage + " Sum: " + receivedSum, Toast.LENGTH_LONG).show();
+        }
+    }
 
-        // Setare acțiune pentru buton
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String num1Str = editText1.getText().toString();
-                String num2Str = editText2.getText().toString();
 
-                if (!num1Str.isEmpty() && !num2Str.isEmpty()) {
-                    try {
-                        int num1 = Integer.parseInt(num1Str);
-                        int num2 = Integer.parseInt(num2Str);
-                        int sum = num1 + num2;
-                        textView.setText(String.valueOf(sum));
-                    } catch (NumberFormatException e) {
-                        textView.setText("Invalid input");
-                    }
-                } else {
-                    textView.setText("Enter numbers");
-                }
-            }
-        });
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.w("Lifecycle", "onStart called");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("Lifecycle", "onResume called");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i("Lifecycle", "onPause called");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.v("Lifecycle", "onStop called");
     }
 }
