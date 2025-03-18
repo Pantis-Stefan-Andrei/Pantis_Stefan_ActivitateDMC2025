@@ -9,7 +9,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="26dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,42 +23,37 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Adresa"/>
+                android:text="Adresa" />
 
             <EditText
                 android:id="@+id/etAdresa"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-
+                android:layout_height="wrap_content" />
 
             <!-- Număr camere -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Număr camere"/>
+                android:text="Număr camere" />
 
             <EditText
                 android:id="@+id/etNumarCamere"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"/>
-
-
-
+                android:inputType="number" />
 
             <!-- Checkbox pentru Balcon -->
             <CheckBox
                 android:id="@+id/cbBalcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Are balcon"/>
+                android:text="Are balcon" />
 
             <!-- RadioGroup pentru Tip Locație -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tip locație"/>
+                android:text="Tip locație" />
 
             <RadioGroup
                 android:id="@+id/rgLocatie"
@@ -67,89 +64,99 @@
                     android:id="@+id/rbUrban"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Urban"/>
+                    android:text="Urban" />
 
                 <RadioButton
                     android:id="@+id/rbRural"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Rural"/>
+                    android:text="Rural" />
 
                 <RadioButton
                     android:id="@+id/rbSemiurban"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Semiurban"/>
+                    android:text="Semiurban" />
             </RadioGroup>
 
             <!-- Spinner pentru Tip Apartament -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tip Apartament"/>
+                android:text="Tip Apartament" />
 
             <Spinner
                 android:id="@+id/spinnerTipApartament"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:entries="@array/tip_apartamente"/>
-
+                android:entries="@array/tip_apartamente" />
 
             <!-- Suprafață apartament -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Suprafață (m²)"/>
+                android:text="Suprafață (m²)" />
 
             <EditText
                 android:id="@+id/etSuprafata"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"/>
-
+                android:inputType="numberDecimal" />
 
             <!-- RatingBar -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rating"/>
+                android:text="Rating" />
 
             <RatingBar
                 android:id="@+id/rbRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:numStars="5"/>
+                android:numStars="5" />
 
             <!-- Switch -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Disponibil pentru închiriere"/>
+                android:text="Disponibil pentru închiriere" />
 
             <Switch
                 android:id="@+id/switchInchiriere"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <!-- ToggleButton -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Apartament mobilat"/>
+                android:text="Apartament mobilat" />
 
             <ToggleButton
                 android:id="@+id/toggleMobilat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textOff="Nu"
-                android:textOn="Da"/>
+                android:textOn="Da" />
+
+            <!-- Data construcției -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data construcției" />
 
             <!-- Buton Trimite -->
+
+            <DatePicker
+                android:id="@+id/datePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <Button
                 android:id="@+id/btnSubmit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Trimite"/>
+                android:text="Trimite" />
         </LinearLayout>
     </ScrollView>
 

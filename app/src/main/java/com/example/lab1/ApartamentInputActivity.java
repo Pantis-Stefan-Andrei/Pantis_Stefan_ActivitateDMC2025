@@ -2,15 +2,9 @@ package com.example.lab1;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.RadioGroup;
-import android.widget.RatingBar;
-import android.widget.Spinner;
-import android.widget.Switch;
-import android.widget.ToggleButton;
+import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
+import java.util.Date;
 
 public class ApartamentInputActivity extends AppCompatActivity {
     private EditText etAdresa, etNumarCamere, etSuprafata;
@@ -38,17 +32,7 @@ public class ApartamentInputActivity extends AppCompatActivity {
         btnSubmit = findViewById(R.id.btnSubmit);
         etSuprafata = findViewById(R.id.etSuprafata);
 
-
         btnSubmit.setOnClickListener(v -> {
-            String adresa = etAdresa.getText().toString();
-            int numarCamere = Integer.parseInt(etNumarCamere.getText().toString());
-            boolean areBalcon = cbBalcon.isChecked();
-            float suprafata = Float.parseFloat(etSuprafata.getText().toString());
-            float rating = rbRating.getRating();
-            boolean inchiriere = switchInchiriere.isChecked();
-            boolean mobilat = toggleMobilat.isChecked();
-            String tipApartament = spinnerTipApartament.getSelectedItem().toString();
-
             APArtament.TipLocatie locatie = APArtament.TipLocatie.URBAN;
             int selectedId = rgLocatie.getCheckedRadioButtonId();
             if (selectedId == R.id.rbRural) {
@@ -57,14 +41,23 @@ public class ApartamentInputActivity extends AppCompatActivity {
                 locatie = APArtament.TipLocatie.SEMIURBAN;
             }
 
-            APArtament apartament = new APArtament(adresa, numarCamere, areBalcon, locatie, suprafata,
-                    rating, inchiriere, mobilat, tipApartament);
+            APArtament apartament = new APArtament(
+                    etAdresa.getText().toString(),
+                    Integer.parseInt(etNumarCamere.getText().toString()),
+                    cbBalcon.isChecked(),
+                    locatie,
+                    Float.parseFloat(etSuprafata.getText().toString()),
+                    rbRating.getRating(),
+                    switchInchiriere.isChecked(),
+                    toggleMobilat.isChecked(),
+                    spinnerTipApartament.getSelectedItem().toString(),
+                    new Date()
+            );
 
             Intent returnIntent = new Intent();
             returnIntent.putExtra("apartament", apartament);
             setResult(RESULT_OK, returnIntent);
             finish();
         });
-
     }
 }
