@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="?android:attr/selectableItemBackground"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvAdresa"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvCamere"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvSuprafata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/cbBalcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Are balcon"
+        android:focusable="false"
+        android:clickable="false" />
+
+    <TextView
+        android:id="@+id/tvRating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvLocatie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvTip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/cbInchiriere"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Disponibil pentru închiriere"
+        android:focusable="false"
+        android:clickable="false" />
+
+    <CheckBox
+        android:id="@+id/cbMobilat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mobilat"
+        android:focusable="false"
+        android:clickable="false" />
+
+    <TextView
+        android:id="@+id/tvData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

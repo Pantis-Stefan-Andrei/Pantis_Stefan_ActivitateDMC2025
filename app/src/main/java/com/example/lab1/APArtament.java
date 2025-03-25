@@ -1,9 +1,11 @@
 package com.example.lab1;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
-public class APArtament implements Serializable {
+public class APArtament implements Parcelable {
     private String adresa;
     private int numarCamere;
     private boolean areBalcon;
@@ -33,6 +35,51 @@ public class APArtament implements Serializable {
         this.dataConstructie = dataConstructie;
     }
 
+    protected APArtament(Parcel in) {
+        adresa = in.readString();
+        numarCamere = in.readInt();
+        areBalcon = in.readByte() != 0;
+        locatie = TipLocatie.valueOf(in.readString());
+        suprafata = in.readFloat();
+        rating = in.readFloat();
+        inchiriere = in.readByte() != 0;
+        mobilat = in.readByte() != 0;
+        tipApartament = in.readString();
+        dataConstructie = new Date(in.readLong());
+    }
+
+    public static final Creator<APArtament> CREATOR = new Creator<>() {
+        @Override
+        public APArtament createFromParcel(Parcel in) {
+            return new APArtament(in);
+        }
+
+        @Override
+        public APArtament[] newArray(int size) {
+            return new APArtament[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(adresa);
+        dest.writeInt(numarCamere);
+        dest.writeByte((byte) (areBalcon ? 1 : 0));
+        dest.writeString(locatie.name());
+        dest.writeFloat(suprafata);
+        dest.writeFloat(rating);
+        dest.writeByte((byte) (inchiriere ? 1 : 0));
+        dest.writeByte((byte) (mobilat ? 1 : 0));
+        dest.writeString(tipApartament);
+        dest.writeLong(dataConstructie.getTime());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    // Getters...
 
     public String getAdresa() { return adresa; }
     public int getNumarCamere() { return numarCamere; }
@@ -45,11 +92,5 @@ public class APArtament implements Serializable {
     public String getTipApartament() { return tipApartament; }
     public Date getDataConstructie() { return dataConstructie; }
 
-    @Override
-    public String toString() {
-        return adresa + " - " + numarCamere + " camere, " + suprafata + " m², " +
-                "Balcon: " + (areBalcon ? "Da" : "Nu") + ", " +
-                "Rating: " + rating + " stele, " +
-                "Construit: " + dataConstructie.toString();
-    }
+
 }

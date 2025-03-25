@@ -12,9 +12,11 @@
         android:theme="@style/Theme.Lab1"
         tools:targetApi="31">
         <activity
+            android:name=".ApartamentAdapter"
+            android:exported="false" />
+        <activity
             android:name=".ApartamentInputActivity"
             android:exported="false" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true">
