@@ -2,10 +2,12 @@ package com.example.lab1;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.io.Serializable;
 
 import java.util.Date;
 
-public class APArtament implements Parcelable {
+public class APArtament implements Parcelable, Serializable {
+
     private String adresa;
     private int numarCamere;
     private boolean areBalcon;
