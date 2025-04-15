@@ -2,8 +2,8 @@ package com.example.lab1;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import java.io.Serializable;
 
+import java.io.Serializable;
 import java.util.Date;
 
 public class APArtament implements Parcelable, Serializable {
@@ -23,6 +23,7 @@ public class APArtament implements Parcelable, Serializable {
         URBAN, RURAL, SEMIURBAN
     }
 
+    // ✅ Constructor complet
     public APArtament(String adresa, int numarCamere, boolean areBalcon, TipLocatie locatie, float suprafata,
                       float rating, boolean inchiriere, boolean mobilat, String tipApartament, Date dataConstructie) {
         this.adresa = adresa;
@@ -37,6 +38,23 @@ public class APArtament implements Parcelable, Serializable {
         this.dataConstructie = dataConstructie;
     }
 
+    // ✅ Constructor SIMPLU (folosit de baza de date) – adaugăm valori implicite
+    public APArtament(String adresa, int numarCamere, float rating) {
+        this.adresa = adresa;
+        this.numarCamere = numarCamere;
+        this.rating = rating;
+
+        // 🔧 Valori implicite pentru restul câmpurilor
+        this.areBalcon = false;
+        this.locatie = TipLocatie.URBAN;
+        this.suprafata = 0f;
+        this.inchiriere = false;
+        this.mobilat = false;
+        this.tipApartament = "";
+        this.dataConstructie = new Date(); // acum
+    }
+
+    // ✅ Constructor pentru Parcelable
     protected APArtament(Parcel in) {
         adresa = in.readString();
         numarCamere = in.readInt();
@@ -47,7 +65,8 @@ public class APArtament implements Parcelable, Serializable {
         inchiriere = in.readByte() != 0;
         mobilat = in.readByte() != 0;
         tipApartament = in.readString();
-        dataConstructie = new Date(in.readLong());
+        long time = in.readLong();
+        dataConstructie = time == -1 ? null : new Date(time);
     }
 
     public static final Creator<APArtament> CREATOR = new Creator<>() {
@@ -73,7 +92,7 @@ public class APArtament implements Parcelable, Serializable {
         dest.writeByte((byte) (inchiriere ? 1 : 0));
         dest.writeByte((byte) (mobilat ? 1 : 0));
         dest.writeString(tipApartament);
-        dest.writeLong(dataConstructie.getTime());
+        dest.writeLong(dataConstructie != null ? dataConstructie.getTime() : -1);
     }
 
     @Override
@@ -81,8 +100,7 @@ public class APArtament implements Parcelable, Serializable {
         return 0;
     }
 
-    // Getters...
-
+    // ✅ Getteri
     public String getAdresa() { return adresa; }
     public int getNumarCamere() { return numarCamere; }
     public boolean isAreBalcon() { return areBalcon; }
@@ -93,6 +111,4 @@ public class APArtament implements Parcelable, Serializable {
     public boolean isMobilat() { return mobilat; }
     public String getTipApartament() { return tipApartament; }
     public Date getDataConstructie() { return dataConstructie; }
-
-
 }

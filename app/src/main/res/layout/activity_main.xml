@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,36 +8,155 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- Buton Adaugă -->
     <Button
         android:id="@+id/btnOpenInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Adaugă Apartament"
-        app:layout_constraintBottom_toTopOf="@id/lvApartamente"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5" />
 
+    <!-- Buton Setări -->
     <Button
         android:id="@+id/btnSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Setări"
-        app:layout_constraintBottom_toTopOf="@id/lvApartamente"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintTop_toBottomOf="@id/btnOpenInput"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- ListView -->
     <ListView
         android:id="@+id/lvApartamente"
-        android:layout_width="407dp"
-        android:layout_height="499dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:dividerHeight="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/etValoareString"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnOpenInput" />
+        app:layout_constraintTop_toBottomOf="@id/btnSettings" />
+
+    <!-- Căutare adresă -->
+    <EditText
+        android:id="@+id/etAdresa"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Adresă"
+        app:layout_constraintTop_toBottomOf="@id/btnUpdate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/etNrCamere"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Număr camere"
+        android:inputType="number"
+        app:layout_constraintTop_toBottomOf="@id/etAdresa"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/etRatingInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Rating"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@id/etNrCamere"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <Button
+        android:id="@+id/btnInsert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salvează în DB"
+        app:layout_constraintTop_toBottomOf="@id/etRatingInput"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/etValoareString"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="184dp"
+        android:hint="Caută după adresă"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSettings" />
+
+    <Button
+        android:id="@+id/btnCautaAdresa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Caută"
+        app:layout_constraintTop_toBottomOf="@id/etValoareString"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Interval camere -->
+    <EditText
+        android:id="@+id/etMin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Min camere"
+        app:layout_constraintTop_toBottomOf="@id/btnCautaAdresa"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/etMax" />
+
+    <EditText
+        android:id="@+id/etMax"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Max camere"
+        app:layout_constraintTop_toBottomOf="@id/btnCautaAdresa"
+        app:layout_constraintStart_toEndOf="@id/etMin"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnInterval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selectează interval"
+        app:layout_constraintTop_toBottomOf="@id/etMax"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Rating < -->
+    <EditText
+        android:id="@+id/etRating"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@id/btnInterval"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnStergere"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Șterge"
+        app:layout_constraintTop_toBottomOf="@id/etRating"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Adrese care încep cu... -->
+    <EditText
+        android:id="@+id/etLitera"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Adrese ce încep cu..."
+        app:layout_constraintTop_toBottomOf="@id/btnStergere"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update camere"
+        app:layout_constraintTop_toBottomOf="@id/etLitera"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
