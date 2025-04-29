@@ -163,6 +163,11 @@ public class MainActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
+        Button button = findViewById(R.id.button_open_list);
+        button.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ImageListActivity.class);
+            startActivity(intent);
+        });
 
         btnUpdate.setOnClickListener(v -> {
             String literaStr = etLitera.getText().toString();
