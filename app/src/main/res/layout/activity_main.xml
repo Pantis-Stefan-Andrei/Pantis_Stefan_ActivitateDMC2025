@@ -1,39 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="16dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <EditText
-        android:id="@+id/editTextCity"
-        android:hint="Introdu oraș"
-        android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+    <Button
+        android:id="@+id/openMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deschide Harta" />
+    <Button
+        android:id="@+id/btnPolygon"
+        android:text="Desenează Poligon"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/buttonSearch"
-        android:text="Caută vreme"
-        android:layout_width="match_parent"
+        android:id="@+id/btnCircle"
+        android:text="Desenează Cerc"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/textViewCityCode"
-        android:text="Cod oraș:"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/textViewResult"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:textSize="16sp" />
 </LinearLayout>
