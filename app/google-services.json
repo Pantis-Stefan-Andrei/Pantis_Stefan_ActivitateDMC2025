@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "50443833616",
+    "firebase_url": "https://lab11-96a9e-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "lab11-96a9e",
+    "storage_bucket": "lab11-96a9e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50443833616:android:70877a019ecc00d5cfd595",
+        "android_client_info": {
+          "package_name": "com.example.lab1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzuHoy2Fi-0glx4FmTfmpaYNq1tIa37G4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
