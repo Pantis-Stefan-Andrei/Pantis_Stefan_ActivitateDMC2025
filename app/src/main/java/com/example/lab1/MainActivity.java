@@ -1,22 +1,31 @@
 package com.example.lab1;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.*;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.os.Parcelable;
-import android.widget.*;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE = 1;
 
-    private Button btnOpenInput, btnSettings, btnInsert;
+    private Button btnOpenInput, btnSettings, btnInsert,btnFavorite;
+
     private ListView lvApartamente;
     private ArrayList<APArtament> apartamenteList;
     private ApartamentAdapter adapter;
@@ -25,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText etValoareString, etMin, etMax, etRating, etLitera;
     private Button btnCautaAdresa, btnInterval, btnStergere, btnUpdate;
 
-    // pentru inserare
     private EditText etAdresa, etNrCamere, etRatingInput;
+    private CheckBox cbDisponibilOnline;
 
     private ApartamentDbHelper dbHelper;
 
@@ -55,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
         dbHelper = new ApartamentDbHelper(this);
@@ -67,19 +75,19 @@ public class MainActivity extends AppCompatActivity {
         etRating = findViewById(R.id.etRating);
         etLitera = findViewById(R.id.etLitera);
 
-        etAdresa = findViewById(R.id.etAdresa); // nou
-        etNrCamere = findViewById(R.id.etNrCamere); // nou
-        etRatingInput = findViewById(R.id.etRatingInput); // nou
+        etAdresa = findViewById(R.id.etAdresa);
+        etNrCamere = findViewById(R.id.etNrCamere);
+        etRatingInput = findViewById(R.id.etRatingInput);
+        cbDisponibilOnline = findViewById(R.id.cbDisponibilOnline);
 
-        // inițializare butoane
         btnCautaAdresa = findViewById(R.id.btnCautaAdresa);
         btnInterval = findViewById(R.id.btnInterval);
         btnStergere = findViewById(R.id.btnStergere);
         btnUpdate = findViewById(R.id.btnUpdate);
-
+        btnFavorite = findViewById(R.id.btnFavorite);
         btnOpenInput = findViewById(R.id.btnOpenInput);
         btnSettings = findViewById(R.id.btnSettings);
-        btnInsert = findViewById(R.id.btnInsert); // nou
+        btnInsert = findViewById(R.id.btnInsert);
 
         lvApartamente = findViewById(R.id.lvApartamente);
 
@@ -90,6 +98,27 @@ public class MainActivity extends AppCompatActivity {
         apartamenteList.addAll(dbHelper.getAll());
         adapter.notifyDataSetChanged();
 
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("apartamente");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Toast.makeText(MainActivity.this, "Modificări în Firebase!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("Firebase", "Eroare citire: " + error.getMessage());
+            }
+        });
+
+        btnFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, FavoriteFirebaseActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnInsert.setOnClickListener(v -> {
             String adresa = etAdresa.getText().toString();
@@ -102,12 +131,19 @@ public class MainActivity extends AppCompatActivity {
                 APArtament apartament = new APArtament(adresa, nrCamere, rating);
 
                 dbHelper.insertApartament(apartament);
-
                 apartamenteList.clear();
                 apartamenteList.addAll(dbHelper.getAll());
                 adapter.notifyDataSetChanged();
-
                 Toast.makeText(this, "Apartament salvat!", Toast.LENGTH_SHORT).show();
+
+                if (cbDisponibilOnline.isChecked()) {
+                    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("apartamente");
+                    String id = dbRef.push().getKey();
+                    if (id != null) {
+                        dbRef.child(id).setValue(apartament);
+                    }
+                }
+
             } else {
                 Toast.makeText(this, "Completează toate câmpurile!", Toast.LENGTH_SHORT).show();
             }
@@ -163,9 +199,10 @@ public class MainActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
+
         Button button = findViewById(R.id.button_open_list);
         button.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ImageListActivity.class);
+            Intent intent = new Intent(MainActivity.this, FavoriteFirebaseActivity.class);
             startActivity(intent);
         });
 

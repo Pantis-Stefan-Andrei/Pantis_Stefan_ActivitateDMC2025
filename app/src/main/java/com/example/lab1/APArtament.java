@@ -18,12 +18,14 @@ public class APArtament implements Parcelable, Serializable {
     private boolean mobilat;
     private String tipApartament;
     private Date dataConstructie;
+    private boolean favorit;
+
 
     public enum TipLocatie {
         URBAN, RURAL, SEMIURBAN
     }
 
-    // ✅ Constructor complet
+    public APArtament() {}
     public APArtament(String adresa, int numarCamere, boolean areBalcon, TipLocatie locatie, float suprafata,
                       float rating, boolean inchiriere, boolean mobilat, String tipApartament, Date dataConstructie) {
         this.adresa = adresa;
@@ -38,23 +40,23 @@ public class APArtament implements Parcelable, Serializable {
         this.dataConstructie = dataConstructie;
     }
 
-    // ✅ Constructor SIMPLU (folosit de baza de date) – adaugăm valori implicite
+
     public APArtament(String adresa, int numarCamere, float rating) {
         this.adresa = adresa;
         this.numarCamere = numarCamere;
         this.rating = rating;
 
-        // 🔧 Valori implicite pentru restul câmpurilor
+
         this.areBalcon = false;
         this.locatie = TipLocatie.URBAN;
         this.suprafata = 0f;
         this.inchiriere = false;
         this.mobilat = false;
         this.tipApartament = "";
-        this.dataConstructie = new Date(); // acum
+        this.dataConstructie = new Date();
     }
 
-    // ✅ Constructor pentru Parcelable
+
     protected APArtament(Parcel in) {
         adresa = in.readString();
         numarCamere = in.readInt();
@@ -100,7 +102,7 @@ public class APArtament implements Parcelable, Serializable {
         return 0;
     }
 
-    // ✅ Getteri
+
     public String getAdresa() { return adresa; }
     public int getNumarCamere() { return numarCamere; }
     public boolean isAreBalcon() { return areBalcon; }
@@ -111,4 +113,7 @@ public class APArtament implements Parcelable, Serializable {
     public boolean isMobilat() { return mobilat; }
     public String getTipApartament() { return tipApartament; }
     public Date getDataConstructie() { return dataConstructie; }
+    public boolean isFavorit() { return favorit; }
+    public void setFavorit(boolean favorit) { this.favorit = favorit; }
+
 }

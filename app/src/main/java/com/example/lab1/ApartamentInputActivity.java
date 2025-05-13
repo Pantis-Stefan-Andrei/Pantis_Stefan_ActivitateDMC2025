@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Parcelable;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -64,7 +66,8 @@ public class ApartamentInputActivity extends AppCompatActivity {
         toggleMobilat = findViewById(R.id.toggleMobilat);
         datePicker = findViewById(R.id.datePicker);
         btnSubmit = findViewById(R.id.btnSubmit);
-
+        CheckBox cbOnline = findViewById(R.id.cbDisponibilOnline);
+        boolean disponibilOnline = cbOnline.isChecked();
 
         etAdresa.setTextColor(Color.parseColor(culoare));
         etAdresa.setTextSize(dimensiune);
@@ -124,7 +127,14 @@ public class ApartamentInputActivity extends AppCompatActivity {
                     spinnerTipApartament.getSelectedItem().toString(),
                     c.getTime()
             );
+            if (disponibilOnline) {
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("apartamente");
+                String id = ref.push().getKey();
+                if (id != null) {
+                    ref.child(id).setValue(apartament);
 
+                }
+            }
             Intent returnIntent = new Intent();
             returnIntent.putExtra("apartament", (Parcelable) apartament);
             setResult(RESULT_OK, returnIntent);

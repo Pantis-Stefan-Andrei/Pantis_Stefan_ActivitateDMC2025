@@ -19,6 +19,7 @@
             android:name=".ApartamentDbHelper"
             android:exported="false" />
         <activity android:name=".SettingsActivity" />
+        <activity android:name=".FavoriteFirebaseActivity" />
         <activity
             android:name=".ApartamentAdapter"
             android:exported="false" />
